@@ -2,7 +2,7 @@ const passport = require('passport')
 const ObjectID = require('mongodb').ObjectID
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt')
-const GitHubStrategy = require('passport-github2')
+const GitHubStrategy = require('passport-github').Strategy
 require('dotenv').config();
 
 module.exports = function (app, myDataBase) {
