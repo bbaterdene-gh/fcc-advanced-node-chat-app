@@ -18,9 +18,19 @@ module.exports = function (app, myDataBase) {
       message: 'Please login',
       showLogin: true,
       showRegistration: true,
+      showSocialAuth: true,
     });
   });
 
+  app
+    .route('/auth/github')
+    .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+  app
+    .route('/auth/github/callback')
+    .get(passport.authenticate('github', { failureRedirect: '/' }), function(req, res) {
+      res.redirect('/profile');
+    })
 
   app.post('/login', passport.authenticate('local', { failureRedirect: '/' }), function(req, res) {
     res.redirect('/profile');
