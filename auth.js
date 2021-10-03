@@ -37,7 +37,7 @@ module.exports = function (app, myDataBase) {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: "" + process.env.BASE_URL + "auth/github/callback",
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, cb) {
     myDataBase.findOneAndUpdate(
       { id: profile.id },
       {
@@ -60,7 +60,7 @@ module.exports = function (app, myDataBase) {
       },
       { upsert: true, new: true },
       (err, doc) => {
-        return done(null, doc.value);
+        return cb(null, doc.value);
       }
     );
   }
