@@ -45,6 +45,13 @@ io.on('connection', socket => {
       connected: false,
     });
   });
+
+  socket.on('chat message', (message) => {
+    io.emit('chat message', {
+      name: socket.request.user.username || socket.request.user.name,
+      message: message,
+    });
+  });
 });
 
 fccTesting(app); //For FCC testing purposes
