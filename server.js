@@ -10,9 +10,12 @@ const auth = require('./auth')
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+let currentUsers = 0;
 
 io.on('connection', socket => {
+  ++currentUsers;
   console.log('A user has connected');
+  io.emit('user count', currentUsers);
 });
 
 fccTesting(app); //For FCC testing purposes
