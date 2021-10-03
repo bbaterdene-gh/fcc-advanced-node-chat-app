@@ -40,7 +40,7 @@ module.exports = function (app, myDataBase) {
     .route('/profile')
     .get(ensureAuthenticated, (req,res) => {
       res.render('profile', {
-        username: req.user.username,
+        username: req.user.username || req.user.name,
       });
     });
 
