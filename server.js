@@ -16,6 +16,11 @@ io.on('connection', socket => {
   ++currentUsers;
   console.log('A user has connected');
   io.emit('user count', currentUsers);
+
+  socket.on('disconnect', () => {
+    --currentUsers;
+    io.emit('user count', currentUsers);
+  });
 });
 
 fccTesting(app); //For FCC testing purposes
